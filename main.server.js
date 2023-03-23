@@ -137,9 +137,8 @@ export default class NotABotStats {
 		}
 
 		log('Updating Not a bot stats ... Done !', 'info');
-
 		
-		SteamSoldWishlist.running = false;
+		NotABotStats.running = false;
 	}
 }
 
