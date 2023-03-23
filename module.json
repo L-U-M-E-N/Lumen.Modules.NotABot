@@ -1,0 +1,16 @@
+{
+	"name": "notabot-stats",
+	"fullName": "L.U.M.E.N. Not a bot stats module",
+	"author": "Elanis",
+	"version": "1.0.0",
+	"dependencies": {},
+	"desktop": {
+		"module": true,
+		"window": false
+	},
+	"mobile": {
+		"module": false,
+		"window": false
+	},
+	"config": {}
+}
