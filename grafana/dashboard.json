@@ -590,12 +590,12 @@
           "type": "grafana-postgresql-datasource",
           "uid": "${DS_LUMEN}"
         },
-        "definition": "SELECT DISTINCT name FROM notabot_stats_server",
+        "definition": "SELECT DISTINCT \"Name\" FROM \"NotABot\".\"ServerStats\"",
         "includeAll": false,
         "label": "Server",
         "name": "Server",
         "options": [],
-        "query": "SELECT DISTINCT name FROM notabot_stats_server",
+        "query": "SELECT DISTINCT \"Name\" FROM \"NotABot\".\"ServerStats\"",
         "refresh": 1,
         "regex": "",
         "sort": 1,
@@ -611,6 +611,6 @@
   "timezone": "",
   "title": "Not a bot stats",
   "uid": "ABO3bdf4z",
-  "version": 2,
+  "version": 3,
   "weekStart": ""
 }
