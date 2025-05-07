@@ -5,7 +5,7 @@
       "label": "Lumen",
       "description": "",
       "type": "datasource",
-      "pluginId": "postgres",
+      "pluginId": "grafana-postgresql-datasource",
       "pluginName": "PostgreSQL"
     }
   ],
@@ -15,13 +15,13 @@
       "type": "grafana",
       "id": "grafana",
       "name": "Grafana",
-      "version": "9.3.6"
+      "version": "11.5.2"
     },
     {
       "type": "datasource",
-      "id": "postgres",
+      "id": "grafana-postgresql-datasource",
       "name": "PostgreSQL",
-      "version": "1.0.0"
+      "version": "11.5.1"
     },
     {
       "type": "panel",
@@ -63,7 +63,6 @@
   "graphTooltip": 0,
   "id": null,
   "links": [],
-  "liveNow": false,
   "panels": [
     {
       "collapsed": false,
@@ -80,7 +79,7 @@
     },
     {
       "datasource": {
-        "type": "postgres",
+        "type": "grafana-postgresql-datasource",
         "uid": "${DS_LUMEN}"
       },
       "fieldConfig": {
@@ -89,11 +88,14 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
+            "axisSoftMin": 0,
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 0,
             "gradientMode": "none",
@@ -102,6 +104,7 @@
               "tooltip": false,
               "viz": false
             },
+            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineWidth": 1,
             "pointSize": 5,
@@ -150,20 +153,22 @@
           "showLegend": true
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "single",
           "sort": "none"
         }
       },
+      "pluginVersion": "11.5.2",
       "targets": [
         {
           "datasource": {
-            "type": "postgres",
+            "type": "grafana-postgresql-datasource",
             "uid": "${DS_LUMEN}"
           },
           "editorMode": "code",
           "format": "table",
           "rawQuery": true,
-          "rawSql": "SELECT date, membercount FROM notabot_stats_server WHERE $__timeFilter(date) AND name = '$Server'",
+          "rawSql": "SELECT \"Date\", \"MemberCount\" FROM \"NotABot\".\"ServerStats\" WHERE $__timeFilter(\"Date\") AND \"Name\" = '$Server' ORDER BY \"Date\" ASC",
           "refId": "A",
           "sql": {
             "columns": [
@@ -204,7 +209,7 @@
     },
     {
       "datasource": {
-        "type": "postgres",
+        "type": "grafana-postgresql-datasource",
         "uid": "${DS_LUMEN}"
       },
       "fieldConfig": {
@@ -213,12 +218,14 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "axisSoftMin": 0,
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 0,
             "gradientMode": "none",
@@ -227,6 +234,7 @@
               "tooltip": false,
               "viz": false
             },
+            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineWidth": 1,
             "pointSize": 5,
@@ -275,20 +283,22 @@
           "showLegend": true
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "single",
           "sort": "none"
         }
       },
+      "pluginVersion": "11.5.2",
       "targets": [
         {
           "datasource": {
-            "type": "postgres",
+            "type": "grafana-postgresql-datasource",
             "uid": "${DS_LUMEN}"
           },
           "editorMode": "code",
           "format": "table",
           "rawQuery": true,
-          "rawSql": "SELECT date, messagecount FROM notabot_stats_server WHERE $__timeFilter(date) AND name = '$Server'",
+          "rawSql": "SELECT \"Date\", \"MessageCount\" FROM \"NotABot\".\"ServerStats\" WHERE $__timeFilter(\"Date\") AND \"Name\" = '$Server' ORDER BY \"Date\" ASC",
           "refId": "A",
           "sql": {
             "columns": [
@@ -329,7 +339,7 @@
     },
     {
       "datasource": {
-        "type": "postgres",
+        "type": "grafana-postgresql-datasource",
         "uid": "${DS_LUMEN}"
       },
       "fieldConfig": {
@@ -338,12 +348,14 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "axisSoftMin": 0,
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 0,
             "gradientMode": "none",
@@ -352,6 +364,7 @@
               "tooltip": false,
               "viz": false
             },
+            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineWidth": 1,
             "pointSize": 5,
@@ -400,20 +413,22 @@
           "showLegend": true
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "single",
           "sort": "none"
         }
       },
+      "pluginVersion": "11.5.2",
       "targets": [
         {
           "datasource": {
-            "type": "postgres",
+            "type": "grafana-postgresql-datasource",
             "uid": "${DS_LUMEN}"
           },
           "editorMode": "code",
           "format": "table",
           "rawQuery": true,
-          "rawSql": "SELECT date, COUNT(userid) FROM notabot_stats_server_users WHERE $__timeFilter(date) AND id = (SELECT id from notabot_stats_server WHERE name = '$Server' LIMIT 1) GROUP BY date",
+          "rawSql": "SELECT \"Date\", COUNT(\"UserId\") FROM \"NotABot\".\"ServerUserStats\" WHERE $__timeFilter(\"Date\") AND \"Id\" = (SELECT \"Id\" from \"NotABot\".\"ServerStats\" WHERE \"Name\" = '$Server' LIMIT 1) GROUP BY \"Date\"",
           "refId": "A",
           "sql": {
             "columns": [
@@ -456,7 +471,7 @@
     },
     {
       "datasource": {
-        "type": "postgres",
+        "type": "grafana-postgresql-datasource",
         "uid": "${DS_LUMEN}"
       },
       "fieldConfig": {
@@ -466,7 +481,9 @@
           },
           "custom": {
             "align": "auto",
-            "displayMode": "auto",
+            "cellOptions": {
+              "type": "auto"
+            },
             "inspect": false
           },
           "mappings": [],
@@ -494,7 +511,9 @@
       },
       "id": 9,
       "options": {
+        "cellHeight": "sm",
         "footer": {
+          "countRows": false,
           "fields": "",
           "reducer": [
             "sum"
@@ -503,17 +522,17 @@
         },
         "showHeader": true
       },
-      "pluginVersion": "9.3.6",
+      "pluginVersion": "11.5.2",
       "targets": [
         {
           "datasource": {
-            "type": "postgres",
+            "type": "grafana-postgresql-datasource",
             "uid": "${DS_LUMEN}"
           },
           "editorMode": "code",
           "format": "table",
           "rawQuery": true,
-          "rawSql": "SELECT reaction, SUM(amount) FROM notabot_stats_server_reactions WHERE $__timeFilter(date) AND id = (SELECT id from notabot_stats_server WHERE name = '$Server' LIMIT 1) GROUP BY reaction ORDER BY 2 DESC LIMIT 10",
+          "rawSql": "SELECT \"Reaction\", SUM(\"Amount\") FROM \"NotABot\".\"ServerReactionStats\" WHERE $__timeFilter(\"Date\") AND \"Id\" = (SELECT \"Id\" from \"NotABot\".\"ServerStats\" WHERE \"Name\" = '$Server' LIMIT 1) GROUP BY \"Reaction\" ORDER BY 2 DESC LIMIT 10",
           "refId": "A",
           "sql": {
             "columns": [
@@ -560,42 +579,38 @@
       "type": "table"
     }
   ],
-  "refresh": false,
-  "schemaVersion": 37,
-  "style": "dark",
+  "refresh": "",
+  "schemaVersion": 40,
   "tags": [],
   "templating": {
     "list": [
       {
         "current": {},
         "datasource": {
-          "type": "postgres",
+          "type": "grafana-postgresql-datasource",
           "uid": "${DS_LUMEN}"
         },
         "definition": "SELECT DISTINCT name FROM notabot_stats_server",
-        "hide": 0,
         "includeAll": false,
         "label": "Server",
-        "multi": false,
         "name": "Server",
         "options": [],
         "query": "SELECT DISTINCT name FROM notabot_stats_server",
         "refresh": 1,
         "regex": "",
-        "skipUrlSync": false,
         "sort": 1,
         "type": "query"
       }
     ]
   },
   "time": {
-    "from": "now-5y",
+    "from": "now-2y",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "",
   "title": "Not a bot stats",
   "uid": "ABO3bdf4z",
-  "version": 4,
+  "version": 2,
   "weekStart": ""
 }
