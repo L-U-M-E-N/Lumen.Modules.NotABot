@@ -11,6 +11,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+		<PackageReference Include="Dysnomia.Common.WebAPIWrapper" Version="1.7.0" />
 		<PackageReference Include="Lumen.Modules.Sdk" Version="0.6.0" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="9.0.4" />
 	</ItemGroup>
