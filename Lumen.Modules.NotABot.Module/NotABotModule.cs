@@ -22,8 +22,7 @@ namespace Lumen.Modules.NotABot.Module {
         }
 
         public override Task InitAsync(LumenModuleRunsOnFlag currentEnv) {
-            // Nothing to do
-            return Task.CompletedTask;
+            return RunAsync(currentEnv, DateTime.UtcNow);
         }
 
         private async Task<NotABotAPIDto> FetchData(string serverURL, string apiKey, long serverId, DateTime date) {
