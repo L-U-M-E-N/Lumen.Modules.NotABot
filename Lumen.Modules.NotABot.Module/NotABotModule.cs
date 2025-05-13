@@ -105,7 +105,7 @@ namespace Lumen.Modules.NotABot.Module {
 
                         await context.SaveChangesAsync();
 
-                        logger.LogTrace($"[{nameof(NotABotModule)}] Insert ok for {serverId} / {date:yyyy-MM-dd}");
+                        logger.LogTrace($"[{nameof(NotABotModule)}] Insert ok for {serverId} / {selectedDate:yyyy-MM-dd}");
                     }
                 }
             } catch (Exception ex) {
