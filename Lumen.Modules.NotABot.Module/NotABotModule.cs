@@ -48,7 +48,7 @@ namespace Lumen.Modules.NotABot.Module {
                 return new DateTime(2017, 1, 1, 0, 0, 0, DateTimeKind.Utc);
             }
 
-            return context.ServerStats.Where(x => x.Id == serverId).Select(x => x.Date).Max();
+            return context.ServerStats.AsNoTracking().Where(x => x.Id == serverId).Select(x => x.Date).Max();
         }
 
         public override async Task RunAsync(LumenModuleRunsOnFlag currentEnv, DateTime date) {
