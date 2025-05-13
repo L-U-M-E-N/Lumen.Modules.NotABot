@@ -28,7 +28,7 @@ namespace Lumen.Modules.NotABot.Module {
         private async Task<NotABotAPIDto> FetchData(string serverURL, string apiKey, long serverId, DateTime date) {
             using var httpClient = new HttpClient();
             httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {apiKey}");
-            httpClient.DefaultRequestHeaders.Add("user-agent", $"L.U.M.E.N. stats gatherer - By Elanis - https://github.com/L-U-M-E-N/");
+            httpClient.DefaultRequestHeaders.TryAddWithoutValidation("user-agent", $"L.U.M.E.N. stats gatherer - By Elanis - https://github.com/L-U-M-E-N/");
 
             var res = await httpClient.GetAsync($"{serverURL}/stats/server/{serverId}/day/{date:yyyy-MM-dd}");
             if (res is null || res.StatusCode != HttpStatusCode.OK) {
