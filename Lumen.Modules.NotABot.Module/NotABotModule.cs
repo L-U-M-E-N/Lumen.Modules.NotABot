@@ -61,12 +61,12 @@ namespace Lumen.Modules.NotABot.Module {
                 foreach (var configEntry in config) {
                     var serverId = long.Parse(configEntry.ServerId);
                     var maxDate = GetLatestStatDateForServer(context, serverId);
-                    logger.LogTrace($"[{nameof(NotABotModule)}] Max date for {serverId}: {date:yyyy-MM-dd}");
+                    logger.LogTrace($"[{nameof(NotABotModule)}] Max date for {serverId}: {maxDate:yyyy-MM-dd}");
                     for (var selectedDate = maxDate.AddDays(1); selectedDate < date.AddDays(-1); selectedDate.AddDays(1)) {
-                        logger.LogTrace($"[{nameof(NotABotModule)}] Fetching for {serverId} / {date:yyyy-MM-dd}");
-                        var data = await FetchData(configEntry.ServerUrl, configEntry.AuthToken, serverId, date);
+                        logger.LogTrace($"[{nameof(NotABotModule)}] Fetching for {serverId} / {selectedDate:yyyy-MM-dd}");
+                        var data = await FetchData(configEntry.ServerUrl, configEntry.AuthToken, serverId, selectedDate);
 
-                        logger.LogTrace($"[{nameof(NotABotModule)}] Fetch ok for {serverId} / {date:yyyy-MM-dd}");
+                        logger.LogTrace($"[{nameof(NotABotModule)}] Fetch ok for {serverId} / {selectedDate:yyyy-MM-dd}");
 
                         await context.ServerStats.AddAsync(new Common.Models.ServerStats {
                             Id = serverId,
