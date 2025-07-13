@@ -15,13 +15,13 @@
       "type": "grafana",
       "id": "grafana",
       "name": "Grafana",
-      "version": "11.5.2"
+      "version": "12.0.2"
     },
     {
       "type": "datasource",
       "id": "grafana-postgresql-datasource",
       "name": "PostgreSQL",
-      "version": "11.5.1"
+      "version": "12.0.2"
     },
     {
       "type": "panel",
@@ -126,8 +126,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -158,7 +157,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "11.5.2",
+      "pluginVersion": "12.0.2",
       "targets": [
         {
           "datasource": {
@@ -256,8 +255,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -288,7 +286,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "11.5.2",
+      "pluginVersion": "12.0.2",
       "targets": [
         {
           "datasource": {
@@ -356,7 +354,7 @@
             "axisSoftMin": 0,
             "barAlignment": 0,
             "barWidthFactor": 0.6,
-            "drawStyle": "line",
+            "drawStyle": "bars",
             "fillOpacity": 0,
             "gradientMode": "none",
             "hideFrom": {
@@ -365,7 +363,7 @@
               "viz": false
             },
             "insertNulls": false,
-            "lineInterpolation": "linear",
+            "lineInterpolation": "stepBefore",
             "lineWidth": 1,
             "pointSize": 5,
             "scaleDistribution": {
@@ -386,8 +384,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -418,7 +415,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "11.5.2",
+      "pluginVersion": "12.0.2",
       "targets": [
         {
           "datasource": {
@@ -428,7 +425,7 @@
           "editorMode": "code",
           "format": "table",
           "rawQuery": true,
-          "rawSql": "SELECT \"Date\", COUNT(\"UserId\") FROM \"NotABot\".\"ServerUserStats\" WHERE $__timeFilter(\"Date\") AND \"Id\" = (SELECT \"Id\" from \"NotABot\".\"ServerStats\" WHERE \"Name\" = '$Server' LIMIT 1) GROUP BY \"Date\"",
+          "rawSql": "SELECT \"Date\", COUNT(\"UserId\")\r\nFROM \"NotABot\".\"ServerUserStats\"\r\nWHERE $__timeFilter(\"Date\")\r\n  AND \"Id\" = (SELECT \"Id\" from \"NotABot\".\"ServerStats\" WHERE \"Name\" = '$Server' LIMIT 1)\r\nGROUP BY \"Date\"\r\n\r\nUNION\r\n\r\nSELECT generate_series::date, 0 \r\nFROM generate_series($__timeFrom(), $__timeTo(), interval '1 day')\r\nWHERE generate_series::date NOT IN (\r\n  SELECT DISTINCT \"Date\"\r\n  FROM \"NotABot\".\"ServerUserStats\"\r\n  WHERE $__timeFilter(\"Date\")\r\n    AND \"Id\" = (SELECT \"Id\" from \"NotABot\".\"ServerStats\" WHERE \"Name\" = '$Server' LIMIT 1)\r\n)",
           "refId": "A",
           "sql": {
             "columns": [
@@ -491,8 +488,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -522,7 +518,7 @@
         },
         "showHeader": true
       },
-      "pluginVersion": "11.5.2",
+      "pluginVersion": "12.0.2",
       "targets": [
         {
           "datasource": {
@@ -580,7 +576,7 @@
     }
   ],
   "refresh": "",
-  "schemaVersion": 40,
+  "schemaVersion": 41,
   "tags": [],
   "templating": {
     "list": [
@@ -611,6 +607,6 @@
   "timezone": "",
   "title": "Not a bot stats",
   "uid": "ABO3bdf4z",
-  "version": 3,
+  "version": 2,
   "weekStart": ""
 }
